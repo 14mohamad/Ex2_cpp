@@ -1,9 +1,9 @@
 #include <iostream>
+#include <sstream>
 #include "Graph.hpp"
 
 namespace ariel
 {
-
     Graph::Graph()
     {
         // Constructor
@@ -110,10 +110,34 @@ namespace ariel
         return adjacencyMatrix[u][v];
     }
 
+    std::string Graph::toString() const
+    {
+        std::ostringstream os;
+        os << "[";
+        for (size_t i = 0; i < adjacencyMatrix.size(); ++i)
+        {
+            os << "[";
+            for (size_t j = 0; j < adjacencyMatrix[i].size(); ++j)
+            {
+                os << adjacencyMatrix[i][j];
+                if (j < adjacencyMatrix[i].size() - 1)
+                {
+                    os << ", ";
+                }
+            }
+            os << "]";
+            if (i < adjacencyMatrix.size() - 1)
+            {
+                os << ", ";
+            }
+        }
+        os << "]"; // Ensure it ends without a newline character
+        return os.str();
+    }
+
     //  מטלה 2
 
     // Arithmetic operators
-
     Graph Graph::operator+(const Graph &other) const
     {
         if (getNumVertices() != other.getNumVertices())
@@ -238,11 +262,11 @@ namespace ariel
 
     // Increment and decrement operators
 
-    Graph &Graph::operator++()
+    Graph& Graph::operator++()
     {
-        for (auto &row : adjacencyMatrix)
+        for (auto& row : adjacencyMatrix)
         {
-            for (auto &val : row)
+            for (auto& val : row)
             {
                 ++val;
             }
@@ -257,11 +281,11 @@ namespace ariel
         return temp;
     }
 
-    Graph &Graph::operator--()
+    Graph& Graph::operator--()
     {
-        for (auto &row : adjacencyMatrix)
+        for (auto& row : adjacencyMatrix)
         {
-            for (auto &val : row)
+            for (auto& val : row)
             {
                 --val;
             }
@@ -334,7 +358,7 @@ namespace ariel
         return result;
     }
 
-    // Scalar multiplication
+    // Scalar division
 
     Graph Graph::operator/(int scalar) const
     {

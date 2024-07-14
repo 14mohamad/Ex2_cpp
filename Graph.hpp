@@ -4,13 +4,16 @@
 #include <vector>
 #include <iostream>
 #include <stdexcept>
+
 namespace ariel
 {
-
     class Graph
     {
     private:
         std::vector<std::vector<int>> adjacencyMatrix;
+        
+        // Output operator
+        friend std::ostream &operator<<(std::ostream &os, const Graph &graph);
 
     public:
         Graph();
@@ -37,28 +40,31 @@ namespace ariel
         // return the weight between u and v
         int getWeight(unsigned int u, unsigned int v) const;
 
+        // Return the adjacency matrix as a string
+        std::string toString() const;
+
         // מטלה 2
 
         // Arithmetic operators
-        Graph operator+(const Graph &other) const;
-        Graph &operator+=(const Graph &other);
-        Graph operator-(const Graph &other) const;
-        Graph &operator-=(const Graph &other);
+        Graph operator+(const Graph &graph) const;
+        Graph &operator+=(const Graph &graph);
+        Graph operator-(const Graph &graph) const;
+        Graph &operator-=(const Graph &graph);
         Graph operator+() const; // Unary plus
         Graph operator-() const; // Unary minus
 
         // Comparison operators
-        bool operator==(const Graph &other) const;
-        bool operator!=(const Graph &other) const;
-        bool operator<(const Graph &other) const;
-        bool operator<=(const Graph &other) const;
-        bool operator>(const Graph &other) const;
-        bool operator>=(const Graph &other) const;
+        bool operator==(const Graph &graph) const;
+        bool operator!=(const Graph &graph) const;
+        bool operator<(const Graph &graph) const;
+        bool operator<=(const Graph &graph) const;
+        bool operator>(const Graph &graph) const;
+        bool operator>=(const Graph &graph) const;
 
         // Increment and decrement operators
-        Graph &operator++();   // Prefix increment
+        Graph& operator++();   // Prefix increment
         Graph operator++(int); // Postfix increment
-        Graph &operator--();   // Prefix decrement
+        Graph& operator--();   // Prefix decrement
         Graph operator--(int); // Postfix decrement
 
         // Scalar multiplication
@@ -66,14 +72,11 @@ namespace ariel
         Graph &operator*=(int scalar);
 
         // Graph multiplication
-        Graph operator*(const Graph &other) const;
+        Graph operator*(const Graph &graph) const;
 
         // Scalar division operators
         Graph operator/(int scalar) const;
         Graph &operator/=(int scalar);
-
-        // Output operator
-        friend std::ostream &operator<<(std::ostream &os, const Graph &graph);
     };
 
 } // namespace ariel
